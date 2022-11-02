@@ -13,4 +13,12 @@ public abstract class DomainEvent {
     }
 
     public abstract void process();
+
+    public LocalDateTime recorded() {
+        return recorded;
+    }
+
+    public LocalDateTime occurred() {
+        return occurred;
+    }
 }

@@ -36,6 +36,10 @@ public class Ship {
         return port;
     }
 
+    public void port(Port port) {
+        this.port = port;
+    }
+
     public String name() {
         return name;
     }

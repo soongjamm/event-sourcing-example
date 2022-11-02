@@ -2,31 +2,17 @@ package com.soongjamm.eventsourcing.domain;
 
 import java.util.Objects;
 
-public class Port {
+public record Port(String name, Country country) {
 
-    public static final Port AT_SEA = new Port("At Sea", null);
-
-    private final String name;
-    private final Country country;
-
-    public Port(String name, Country country) {
-        this.name = name;
-        this.country = country;
-    }
-
-    public String name() {
-        return name;
-    }
-
-    public Country country() {
-        return country;
+    public void handle(ArrivalEvent arrivalEvent) {
+        arrivalEvent.ship().port(this);
+        Registry.customNotificationGateway().notify(arrivalEvent);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Port)) return false;
-        Port port = (Port) o;
+        if (!(o instanceof Port port)) return false;
         return Objects.equals(name, port.name) && country == port.country;
     }
 

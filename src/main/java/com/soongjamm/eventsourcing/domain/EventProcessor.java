@@ -5,10 +5,14 @@ import java.util.List;
 
 public class EventProcessor {
 
-    private final List<DomainEvent> log = new ArrayList<>();
+    private static final List<DomainEvent> logs = new ArrayList<>();
 
     public void process(DomainEvent e) {
         e.process();
-        log.add(e);
+        logs.add(e);
+    }
+
+    public static List<DomainEvent> logs() {
+        return logs;
     }
 }
